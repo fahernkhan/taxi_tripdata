@@ -1,0 +1,114 @@
+version: 2
+
+sources:
+  - name: taxi_tripdata
+    tables:
+      - name: nyc_taxi_tripdata
+        columns:
+          - name: VendorID
+            description: A code indicating the TPEP provider that provided the record
+            tests:
+              - not_null
+              - accepted_values:
+                  values: [1, 2]
+                  quote: false
+          - name: lpep_pickup_datetime
+            description: The date and time when the meter was engaged
+            tests:
+              - not_null
+              - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: DATETIME
+          - name: lpep_dropoff_datetime
+            description: The date and time when the meter was disengaged
+            tests:
+              - not_null
+              - dbt_expectations.expect_column_values_to_be_of_type:
+                  column_type: DATETIME
+          - name: RatecodeID
+            description: The final rate code in effect at the end of the trip
+            tests:
+              - not_null
+              - accepted_values:
+                  values: [1, 2, 3, 4, 5, 6]
+                  quote: false
+          - name: PULocationID
+            tests:
+              - not_null
+          - name: DOLocationID
+            tests:
+              - not_null
+          - name: passenger_count
+            tests:
+              - not_null
+          - name: trip_distance
+            tests:
+              - not_null
+          - name: fare_amount
+            tests:
+              - not_null
+          - name: extra
+            tests:
+              - not_null
+          - name: mta_tax
+            tests:
+              - not_null
+          - name: tip_amount
+            tests:
+              - not_null
+          - name: tolls_amount
+            tests:
+              - not_null
+          - name: improvement_surcharge
+            tests:
+              - not_null
+          - name: total_amount
+            tests:
+              - not_null
+          - name: payment_type
+            tests:
+              - not_null
+              - accepted_values:
+                  values: [1, 2, 3, 4, 5, 6]
+                  quote: false
+          - name: trip_type
+            tests:
+              - not_null
+          - name: congestion_surcharge
+            tests:
+              - not_null
+          - name: store_and_fwd_flag
+            tests:
+              - not_null
+              - accepted_values:
+                  values: [true, false]
+                  quote: false
+          - name: pickup_day
+            tests:
+              - not_null
+              - dbt_utils.accepted_range:
+                  min_value: 1
+                  max_value: 31
+          - name: pickup_month
+            tests:
+              - not_null
+              - dbt_utils.accepted_range:
+                  min_value: 1
+                  max_value: 12
+          - name: pickup_year
+            tests:
+              - not_null
+          - name: dropoff_day
+            tests:
+              - not_null
+              - dbt_utils.accepted_range:
+                  min_value: 1
+                  max_value: 31
+          - name: dropoff_month
+            tests:
+              - not_null
+              - dbt_utils.accepted_range:
+                  min_value: 1
+                  max_value: 12
+          - name: dropoff_year
+            tests:
+              - not_null

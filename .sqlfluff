@@ -1,0 +1,6 @@
+[sqlfluff]
+templater = dbt
+dialect = bigquery
+
+[sqlfluff:indentation]
+tab_space_size = 2
