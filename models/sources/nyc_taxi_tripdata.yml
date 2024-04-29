@@ -32,39 +32,51 @@ sources:
                   values: [1, 2, 3, 4, 5, 6]
                   quote: false
           - name: PULocationID
+            description: TLC Taxi Zone in which the taximeter was engaged
             tests:
               - not_null
           - name: DOLocationID
+            description: TLC Taxi Zone in which the taximeter was disengaged
             tests:
               - not_null
           - name: passenger_count
+            description: The number of passengers in the vehicle
             tests:
               - not_null
           - name: trip_distance
+            description: The elapsed trip distance in miles reported by the taximeter
             tests:
               - not_null
           - name: fare_amount
+            description: The time-and-distance fare calculated by the meter
             tests:
               - not_null
           - name: extra
+            description: Miscellaneous extras and surcharges. Currently, this only includes the $0.50 and $1 rush hour and overnight charges
             tests:
               - not_null
           - name: mta_tax
+            description: $0.50 MTA tax that is automatically triggered based on the metered rate in use
             tests:
               - not_null
           - name: tip_amount
+            description: This field is automatically populated for credit card tips. Cash tips are not included
             tests:
               - not_null
           - name: tolls_amount
+            description: Total amount of all tolls paid in trip
             tests:
               - not_null
           - name: improvement_surcharge
+            description: $0.30 improvement surcharge assessed trips at the flag drop. The improvement surcharge began being levied in 2015
             tests:
               - not_null
           - name: total_amount
+            description: The total amount charged to passengers. Does not include cash tips
             tests:
               - not_null
           - name: payment_type
+            description: A numeric code signifying how the passenger paid for the trip
             tests:
               - not_null
               - accepted_values:
@@ -77,38 +89,45 @@ sources:
             tests:
               - not_null
           - name: store_and_fwd_flag
+            description: This flag indicates whether the trip record was held in vehicle
             tests:
               - not_null
               - accepted_values:
                   values: [true, false]
                   quote: false
           - name: pickup_day
+            description: The date and time when the meter was engaged in day time
             tests:
               - not_null
               - dbt_utils.accepted_range:
                   min_value: 1
                   max_value: 31
           - name: pickup_month
+            description: The date and time when the meter was engaged in month time
             tests:
               - not_null
               - dbt_utils.accepted_range:
                   min_value: 1
                   max_value: 12
           - name: pickup_year
+            description: The date and time when the meter was engaged in year time
             tests:
               - not_null
           - name: dropoff_day
+            description: The date and time when the meter was disengaged in day time
             tests:
               - not_null
               - dbt_utils.accepted_range:
                   min_value: 1
                   max_value: 31
           - name: dropoff_month
+            description: The date and time when the meter was disengaged in month time
             tests:
               - not_null
               - dbt_utils.accepted_range:
                   min_value: 1
                   max_value: 12
           - name: dropoff_year
+            description: The date and time when the meter was disengaged in year time
             tests:
               - not_null
